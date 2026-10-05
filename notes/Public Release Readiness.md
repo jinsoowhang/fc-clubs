@@ -1,7 +1,7 @@
 # Public release readiness
 
-Reviewed 2026-10-04. Scope: assess a source-only GitHub release; no repository
-creation, commits, account changes, or publication were requested or performed.
+Reviewed 2026-10-04. Initial scope: assess a source-only GitHub release. Publication
+was subsequently authorized and completed; see the follow-up below.
 
 ## Verdict
 
@@ -24,8 +24,8 @@ eventual website UI, which has not been implemented yet.
 - Actual runtime databases, environments, caches, generated dbt outputs, and
   secrets directories were excluded from the inspected public inventory.
 - Tested the project ignore rules in a disposable Git repository against eleven
-  representative runtime/private paths; all were excluded. The workspace itself
-  remains outside Git, with no commits or remote to inspect.
+  representative runtime/private paths; all were excluded. At the time of the
+  initial audit, the workspace was outside Git, with no commits or remote to inspect.
 - Copied only candidate public files into a clean temporary directory, excluding
   dependencies and runtime data. The documented locked install, demo, dbt build,
   and report all succeeded without live configuration. The demo build passed 14
@@ -74,3 +74,9 @@ The README now covers architecture, stack, quickstart, live configuration, metri
 choices, quality checks, privacy, and project scope. Source and synthetic examples
 are the release contents; runtime data remains excluded. Git was initialized on
 main only after this explicit publication request.
+
+Publication completed at [fc-clubs](https://github.com/jinsoowhang/fc-clubs). Verified
+PUBLIC visibility, the main branch, matching remote README, and all 52 published
+files without private runtime data. The remote profile README lists FC Clubs third,
+directly below its existing second item. The full verification suite passed again
+before the initial publication commit.

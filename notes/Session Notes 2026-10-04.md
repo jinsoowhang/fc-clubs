@@ -183,3 +183,11 @@ against the new staged repository: all 37 Python tests, lint/formatting, SQL lin
 and public-file checks passed. Reviewed all 52 staged files; no live data, target
 identities, environment files, or generated outputs are staged. README links resolve
 and the profile-only insertion check passes.
+
+Publication result: created and pushed the PUBLIC main-branch repository at
+`https://github.com/jinsoowhang/fc-clubs` (initial commit `dabfcb2`). Pushed the
+profile's third-project entry (commit `f2f05a1`). Verified both remote READMEs match
+their local copies, the profile order is correct, all 52 published source files
+exclude private runtime data, and both branches match their remotes. Normal GitHub
+attribution is permitted; the project repository uses the account's noreply commit
+email. No website was created or deployed.

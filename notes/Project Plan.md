@@ -1,6 +1,6 @@
 # FC Clubs project plan
 
-Status: implementation authorized on 2026-10-04; local collector and dbt baseline implemented. Live collection works for Club B; Club A discovery remains unresolved. Website/publication are later work.
+Status: implementation authorized on 2026-10-04; local collector and dbt baseline implemented and source published publicly on GitHub. Live collection works for Club B; Club A discovery remains unresolved. Website is later work.
 
 ## Accepted requirements
 
@@ -109,7 +109,8 @@ sanitized and captured, with successful empty playoff/friendly reads and an over
 snapshot. The full league window signals possible missing older history. Club A
 still had no exact name match in the current-generation search. Access can change;
 this establishes one successful live collection for Club B.
-No scheduler, website, hosted deployment, Git initialization, or author attribution
+Source is published at [fc-clubs](https://github.com/jinsoowhang/fc-clubs), with normal
+GitHub attribution permitted. No scheduler, website, or hosted application deployment
 has been created. See README.md and [Data Contract](Data%20Contract.md).
 
 ## Still needed
