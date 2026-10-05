@@ -1,0 +1,8 @@
+fc_clubs_analytics:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: "{{ env_var('FC_DB_PATH', 'data/live.duckdb') }}"
+      schema: analytics
+      threads: 1

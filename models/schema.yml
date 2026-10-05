@@ -1,0 +1,103 @@
+version: 2
+models:
+  - name: stg_clubs__matches
+    description: "Grain: one edition/pool/scope/club/match; internal keys are not public exports."
+    columns:
+      - name: match_key
+        data_tests: [not_null]
+      - name: club_alias
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Club A', 'Club B']
+      - name: played_at
+        data_tests: [not_null]
+      - name: outcome
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [win, loss, draw, unknown]
+      - name: match_scope
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [leagueMatch, playoffMatch, friendlyMatch]
+  - name: stg_clubs__role_matches
+    description: "Grain: one club-match/broad role; no player identifiers or distinct-person counts."
+    columns:
+      - name: role
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [forward, midfielder, defender, goalkeeper, unknown]
+  - name: stg_clubs__snapshots
+    description: "Grain: one edition/pool/club/observed time; reported overall totals."
+  - name: stg_clubs__collection_checks
+    description: "Grain: one edition/pool/club/scope/check time; source availability observation."
+    columns:
+      - name: status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [ok, empty, window_full, unavailable, invalid]
+  - name: int_club_match_sessions
+    description: "Grain: one club-match; inferred sessions split after a gap greater than 90 minutes."
+  - name: dim_clubs
+    description: "Grain: one game edition/platform pool/generic club alias."
+    data_tests:
+      - unique_grain:
+          arguments:
+            columns: [edition, platform_pool, club_alias]
+  - name: fct_club_matches
+    description: "Grain: one edition/pool/scope/club/match; includes DNF and unknown outcomes."
+    data_tests:
+      - unique_grain:
+          arguments:
+            columns: [edition, platform_pool, match_scope, club_alias, match_key]
+  - name: fct_club_role_matches
+    description: "Grain: one club-match/role; weighted rating and count-based accuracy."
+    data_tests:
+      - unique_grain:
+          arguments:
+            columns: [edition, platform_pool, match_scope, club_alias, match_key, role]
+  - name: fct_club_sessions
+    description: "Grain: one edition/pool/club/scope/inferred session; IDs can change on backfill."
+    data_tests:
+      - unique_grain:
+          arguments:
+            columns: [edition, platform_pool, club_alias, match_scope, session_number]
+  - name: fct_club_snapshots
+    description: "Grain: one edition/pool/club/observed time; never treated as captured-match totals."
+    data_tests:
+      - unique_grain:
+          arguments:
+            columns: [edition, platform_pool, club_alias, observed_at]
+  - name: mart_club_performance
+    description: "Grain: one edition/pool/club/scope; captured subset, not an entire season."
+    data_tests:
+      - unique_grain:
+          arguments:
+            columns: [edition, platform_pool, club_alias, match_scope]
+  - name: mart_club_daily_performance
+    description: "Grain: one edition/pool/club/scope/UTC played date; only observed dates."
+    data_tests:
+      - unique_grain:
+          arguments:
+            columns: [edition, platform_pool, club_alias, match_scope, played_date]
+  - name: mart_role_performance
+    description: >-
+      Grain: one edition/pool/club/scope/role. Success rates use sums of counts;
+      missing counts propagate to null. Rated-appearance counts accompany game ratings.
+    data_tests:
+      - unique_grain:
+          arguments:
+            columns: [edition, platform_pool, club_alias, match_scope, role]
+  - name: mart_collection_coverage
+    description: >-
+      Grain: one edition/pool/club/scope. A full rolling window indicates possible
+      missing history; no claim that shorter responses mean complete season coverage.
+    data_tests:
+      - unique_grain:
+          arguments:
+            columns: [edition, platform_pool, club_alias, match_scope]

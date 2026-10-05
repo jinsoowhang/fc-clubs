@@ -1,0 +1,21 @@
+name: fc_clubs_analytics
+version: 1.0.0
+config-version: 2
+profile: fc_clubs_analytics
+model-paths: [models]
+macro-paths: [macros]
+test-paths: [tests/dbt]
+clean-targets: [target, logs]
+vars:
+  session_gap_minutes: 90
+models:
+  fc_clubs_analytics:
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: view
+      +schema: intermediate
+    marts:
+      +materialized: table
+      +schema: marts

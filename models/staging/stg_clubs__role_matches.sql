@@ -1,0 +1,20 @@
+select
+    edition,
+    platform_pool,
+    match_scope,
+    club_alias,
+    match_key,
+    role,
+    appearances,
+    rated_appearances,
+    rating_sum,
+    goals,
+    assists,
+    shots,
+    passes_completed,
+    passes_attempted,
+    tackles_completed,
+    tackles_attempted,
+    saves,
+    red_cards
+from {{ source('clubs', 'club_role_matches') }}

@@ -1,0 +1,16 @@
+version: 2
+sources:
+  - name: clubs
+    schema: raw
+    description: >-
+      Typed privacy-filtered observations. No source names or player identifiers.
+      Source responses are filtered in memory before these relations are written.
+    tables:
+      - name: club_matches
+        description: One edition/platform/scope/club/match key; rolling-window captures only.
+      - name: club_role_matches
+        description: One club-match/broad role; counts are anonymous appearances, not people.
+      - name: club_snapshots
+        description: One club/observation time; reported overall totals have a separate source scope.
+      - name: collection_checks
+        description: One club/scope/check time; empty and unavailable are different observations.
